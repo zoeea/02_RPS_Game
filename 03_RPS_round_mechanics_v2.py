@@ -33,28 +33,33 @@ rounds = check_rounds()
 
 end_game = "no"
 while end_game == "no":
+    # Start of game play loop
+
+    rounds_played +=1
 
     # Rounds Heading
     print()
     if rounds == "":
-        heading = "Continuous Mode:"
-        "Round {}".format(rounds_played + 1)
+            heading = "Continuous Mode:"
+            "Round {}".format(rounds_played)
 
     else:
-        heading = "Rounds {} of {}".format(rounds_played + 1, rounds)
+            heading = "Rounds {} of {}".format(rounds_played, rounds)
 
     print(heading)
     choose = input("{} or 'xxx' to "
-                   "end: ".format (choose_instructions))
+                   "end: ".format(choose_instructions))
 
     # end game if exit code is typed
     if choose == "xxx":
+        break
+    elif rounds_played == rounds:
         break
 
     # rest of loop / game
     print("You choose {}".format(choose))
 
-    rounds_played +=1
+    # end game if required
 
 print("Thank you for playing")
 
