@@ -73,12 +73,7 @@ def instructions():
 
 
 # ****** Main routine goes here... *****
-played_before = choice_checker("Have you played the game before? ", ["yes", "no"], "Please enter yes or no")
 
-if played_before == "no":
-    instructions()
-
-print("program continues")
 
 print()
 # Lists of valid responses
@@ -88,11 +83,27 @@ rps_list = ["rock", "paper", "scissors", "xxx"]
 rounds_played = 0
 choose_instructions = "Please choose rock (r), paper " \
                       "(p) or scissors (s)"
+
+# list to hold summary / rounds history
+game_summary = []
+
 # ask user for # of rounds then loop...
 rounds_played = 0 
 
 rounds_lost = 0
 rounds_drawn = 0
+
+
+
+# welcome user
+print("**** Welcome to the great RPS Game *****")
+print()
+
+# ask user if they need instructions...
+played_before = choice_checker("Have you played the game before? ", ["yes", "no"], "Please enter yes or no")
+
+if played_before == "no":
+    instructions()
 
 
 # Ask user for # of rounds, <enter> for infinite mode
@@ -147,30 +158,41 @@ while end_game == "no":
 
 
     feedback = "{} vs {} - you {}".format(user_choice, comp_choice, result)
+    outcome = "Round {}: {}".format(rounds_played, feedback)
 
     print(feedback)
+    game_summary.append(outcome)
     
 
-
-
-# Ask user if they have played before.
-# If 'yes', show instructions
-
-
-# ask user for # of rounds then loop...
-
-
-# Ask user if they want to see their game history.
-# If 'yes' show game history
 
 # Show game statistics
 # Quick Calculations (stats)
 rounds_won = rounds_played - rounds_lost - rounds_drawn
 
 # End of Game statements 
+
+rounds_won = rounds_played - rounds_lost -rounds_drawn
+
+# **** Calculate Game Stats ******
+percent_win = rounds_won / rounds_played * 100
+percent_lose = rounds_lost / rounds_played * 100
+percent_tie = rounds_drawn / rounds_played * 100
+
 print()
-print('***** End Game Summary *****')
-print("Won: {} \t|\t Lost: {} \t|\t Draw: "
-      "{}".format(rounds_won, rounds_lost, rounds_drawn))
+print("***** Game History ******")
+for game in game_summary:
+    print(game)
+
 print()
+
+# displays game stats with % values to the nearest whole number
+print("***** Game Statistics *****")
+print("Win: {}, ({:.0f}%)\nLoss: {}, "
+       "({:.0f}%)\nTie: {}, ({:.0f}%)".format(rounds_won,
+                                              percent_win,
+                                              rounds_lost,
+                                              percent_lose,
+                                              rounds_drawn,
+                                              percent_tie))
+
 print("Thanks for playing")
